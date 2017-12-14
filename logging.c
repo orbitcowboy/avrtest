@@ -349,6 +349,7 @@ decode_avr_float (unsigned val)
   avr_float_t af;
 
   int r = (1 << DIG_EXP) -1;
+  af.mant1 = 0;
   unsigned mant = af.mant = val & ((1 << DIG_MANT) -1);
   val >>= DIG_MANT;
   af.exp_biased = val & r;
