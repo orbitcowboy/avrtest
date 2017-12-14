@@ -1615,10 +1615,8 @@ static void sys_stdout (void)
 
 static void sys_exit (void)
 {
-  int r24 = (int16_t) get_word_reg_raw (24);
-
+  const int r24 = (int16_t) get_word_reg_raw (24);
   log_append ("exit %d: ", r24);
-  get_word_reg (24);
   leave (LEAVE_EXIT, "exit %d function called", program.exit_value = r24);
 }
 
