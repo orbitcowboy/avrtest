@@ -1,6 +1,6 @@
 # Compile for host at build (cross if desired)
 CC	= gcc
-WARN	= -W -Wall -Wno-unused-parameter -pedantic \
+WARN	= -W -Wall -Wextra -Wno-unused-parameter -pedantic \
 	  # -Wstrict-prototypes -Wmissing-prototypes
 
 CFLAGS_FOR_HOST= -O3 -fomit-frame-pointer -std=c99 -dp $(WARN) $(CFLAGS)
