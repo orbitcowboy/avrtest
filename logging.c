@@ -342,7 +342,6 @@ decode_avr_float (unsigned val)
   // b = biased exponent
   // m = mantissa
 
-  int one;
   const int DIG_MANT = 23;
   const int DIG_EXP  = 8;
   const int EXP_BIAS = 127;
@@ -372,11 +371,13 @@ decode_avr_float (unsigned val)
     {
     case FT_NORM:
     case FT_DENORM:
-      one = af.fclass == FT_NORM;
+    {
+      int one = af.fclass == FT_NORM;
       af.mant1 = mant | (one << DIG_MANT);
       af.x = ldexp ((double) af.mant1, af.exp - DIG_MANT);
       af.x = copysign (af.x, af.sign_bit ? -1.0 : 1.0);
       break;
+    }
     case FT_NAN:
       af.x = nan ("");
       break;
