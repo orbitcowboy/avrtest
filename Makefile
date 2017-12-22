@@ -1,9 +1,8 @@
 # Compile for host at build (cross if desired)
-CC	= gcc
-WARN	= -W -Wall -Wextra -Wno-unused-parameter -pedantic \
-	  # -Wstrict-prototypes -Wmissing-prototypes
-
-CFLAGS_FOR_HOST= -O3 -fomit-frame-pointer -std=c99 -dp $(WARN) $(CFLAGS)
+CC= gcc
+WARN=-W -Wall -Wextra -pedantic -Wstrict-prototypes -Wmissing-prototypes -Wno-unused-parameter
+SANITIZER=-fsanitize=address -fsanitize=undefined
+CFLAGS_FOR_HOST= -O3 -fomit-frame-pointer -std=c99 ${SANITIZER} -dp $(WARN) $(CFLAGS)
 
 # compile for i386-mingw32 at *-linux-*
 WINCC	= i386-mingw32-gcc
@@ -17,7 +16,7 @@ endif
 
 # compile for build at build (native)
 CC_FOR_BUILD	= gcc$(BUILD_EXEEXT)
-CFLAGS_FOR_BUILD= -W -Wall -std=c99 -O2 -g
+CFLAGS_FOR_BUILD= -W -Wall -std=c99 -O2 -g 
 
 # compile for AVR at build
 CC_FOR_AVR	= avr-gcc$(BUILD_EXEEXT)
