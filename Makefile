@@ -2,11 +2,17 @@
 CC= ccache gcc
 WARN=-W -Wall -Wextra -pedantic -Wstrict-prototypes -Wmissing-prototypes -Wno-unused-parameter
 SANITIZER=-fsanitize=address -fsanitize=undefined
+CFLAGS=
 CFLAGS_FOR_HOST= -O3 -fomit-frame-pointer -std=c99 ${SANITIZER} -dp $(WARN) $(CFLAGS)
 
 # compile for i386-mingw32 at *-linux-*
 WINCC	= i386-mingw32-gcc
 
+EXEEXT=
+BUILD_EXEEXT=
+DEP_PERF=
+OS=
+XDEF=
 ifneq (,$(findstring Window,$(OS)))
 # For the host
 EXEEXT		= .exe
