@@ -13,6 +13,7 @@ BUILD_EXEEXT=
 DEP_PERF=
 OS=
 XDEF=
+XLIB=
 ifneq (,$(findstring Window,$(OS)))
 # For the host
 EXEEXT		= .exe
