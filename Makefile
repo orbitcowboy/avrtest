@@ -1,9 +1,16 @@
 # Compile for host at build (cross if desired)
 CC= ccache gcc
-WARN=-W -Wall -Wextra -pedantic -Wstrict-prototypes -Wmissing-prototypes -Wno-unused-parameter
+
+# Use the sanitizer by default (except raspberrypi)
 SANITIZER=-fsanitize=address -fsanitize=undefined
+UNAME_N := $(shell uname -n) 
+ifneq (,$(findstring raspberrypi,$(UNAME_N)))
+    SANITIZER = 
+endif
+
+WARN=-W -Wall -Wextra -pedantic -Wstrict-prototypes -Wmissing-prototypes -Wno-unused-parameter ${SANITIZER}
 CFLAGS=
-CFLAGS_FOR_HOST= -O3 -fomit-frame-pointer -std=c99 ${SANITIZER} -dp $(WARN) $(CFLAGS)
+CFLAGS_FOR_HOST= -O3 -fomit-frame-pointer -std=c99 -dp $(WARN) $(CFLAGS)
 
 # compile for i386-mingw32 at *-linux-*
 WINCC	= i386-mingw32-gcc
